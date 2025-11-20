@@ -1,0 +1,56 @@
+autoinstall:
+  version: 1
+  storage:
+    layout:
+      name: lvm
+      overwrite: true
+      encrypted: true
+  locale: en_US.UTF-8
+  keyboard:
+    layout: "dk"
+  timezone: "Europe/Copenhagen"
+  snaps:
+    - name: spotify
+      classic: false
+    - name: ticktick
+      classic: false
+  packages:
+    - neofetch
+    - net-tools
+    - libreoffice
+    - python-is-python3
+    - solaar
+    - python3-pip
+    - hunspell-da
+    - steam-installer
+  late-commands:
+    # Install Filen.io
+    - curtin in-target --target=/target bash -c "wget -O /tmp/filen.deb 'https://cdn.filen.io/@filen/desktop/release/latest/Filen_linux_amd64.deb'"
+    - curtin in-target --target=/target dpkg -i /tmp/filen.deb || true
+    - curtin in-target --target=/target apt-get install -f -y
+    - curtin in-target --target=/target rm -f /tmp/filen.deb
+
+    # Install Proton VPN
+    - curtin in-target --target=/target bash -c "wget -O /tmp/protonvpn.deb 'https://repo.protonvpn.com/debian/dists/stable/main/binary-all/protonvpn-stable-release_1.0.8_all.deb'"
+    - curtin in-target --target=/target dpkg -i /tmp/protonvpn.deb || true
+    - curtin in-target --target=/target apt-get update
+    - curtin in-target --target=/target apt-get install -y proton-vpn-gnome-desktop
+    - curtin in-target --target=/target rm -f /tmp/protonvpn.deb
+
+    # Install Brave Browser
+    - curtin in-target --target=/target bash -c "curl -fsS https://dl.brave.com/install.sh | sh"
+
+    # Install Proton Mail
+    - curtin in-target --target=/target bash -c "wget -O /tmp/protonmail.deb 'https://proton.me/download/mail/linux/1.10.1/ProtonMail-desktop-beta.deb'"
+    - curtin in-target --target=/target dpkg -i /tmp/protonmail.deb || true
+    - curtin in-target --target=/target apt-get install -f -y
+    - curtin in-target --target=/target rm -f /tmp/protonmail.deb
+
+    # Disable swap (optional)
+    - curtin in-target --target=/target swapoff -a
+
+    # Install Proton Pass
+    - curtin in-target --target=/target bash -c "wget -O /tmp/proton-pass.deb 'https://proton.me/download/pass/linux/proton-pass_1.32.11_amd64.deb'"
+    - curtin in-target --target=/target apt-get install -y /tmp/proton-pass.deb
+    - curtin in-target --target=/target rm -f /tmp/proton-pass.deb
+
