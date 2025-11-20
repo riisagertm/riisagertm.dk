@@ -1,5 +1,9 @@
 autoinstall:
   version: 1
+  identity:
+    hostname: ideapad-Y700
+    username: madsriisager
+    password: "$6$YaLKv1Ktd0gnjgr2$QrMwEUEjpzQl6eVuc8LpVzv9TIq5Va5/heqnD9SPz73qtsx1LFliPY6/LXW7AGavqW1oa1jMPnabWn.kIzUnE0"
   storage:
     layout:
       name: lvm
