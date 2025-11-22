@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Setup</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+
+    <style>
+        body {
+            background-color: #10111b;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial, sans-serif;
+            color: white;
+        }
+
+        .box {
+            background-color: #1c1f2a;
+            padding: 1rem;
+            border-radius: 12px;
+            text-align: center;
+            min-width: 200px;
+            position: relative;
+        }
+
+        .copy-icon {
+            cursor: pointer;
+            width: 34px;
+            height: 34px;
+            vertical-align: middle;
+            fill: #ebab0e;
+            margin-left: 0.5rem;
+        }
+
+        #text-to-copy {
+            display: inline-block;
+            font-size: 1.2rem;
+        }
+
+        .copied-message {
+            display: none;
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+            color: #ebab0e; /* same color as copy icon */
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <p id="text-to-copy">curl -fsS https://riisagertm.dk/setup/setup.bash | bash
+            <!-- Inline SVG copy icon -->
+            <svg class="copy-icon" onclick="copyText()" viewBox="0 0 24 24">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M19.5 16.5L19.5 4.5L18.75 3.75H9L8.25 4.5L8.25 7.5L5.25 7.5L4.5 8.25V20.25L5.25 21H15L15.75 20.25V17.25H18.75L19.5 16.5ZM15.75 15.75L15.75 8.25L15 7.5L9.75 7.5V5.25L18 5.25V15.75H15.75ZM6 9L14.25 9L14.25 19.5L6 19.5L6 9Z"/>
+            </svg>
+        </p>
+        <div class="copied-message" id="copied-message">Copied!</div>
+    </div>
+
+    <script>
+        function copyText() {
+            const text = document.getElementById('text-to-copy').childNodes[0].textContent.trim();
+            navigator.clipboard.writeText(text).then(() => {
+                const msg = document.getElementById('copied-message');
+                msg.style.display = 'block';
+                setTimeout(() => { msg.style.display = 'none'; }, 1500);
+            }).catch(err => {
+                alert('Failed to copy text: ' + err);
+            });
+        }
+    </script>
+</body>
+</html>
+
