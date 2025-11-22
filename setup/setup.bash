@@ -58,13 +58,6 @@ sudo apt install -y ffmpeg
 sudo apt install -y filezilla
 sudo apt install -y wine
 
-# Install Jellyfin Media Player
-echo "Install Jellyfin Media Player"
-sudo apt install -y flatpak
-sudo apt install -y gnome-software-plugin-flatpak
-flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
-flatpak install -y flathub com.github.iwalton3.jellyfin-media-player
-
 # Install filen.io
 echo "Installing filen.io"
 wget https://cdn.filen.io/@filen/desktop/release/latest/Filen_linux_amd64.deb -O /tmp/filen.deb
@@ -139,3 +132,10 @@ sed -i 's/^#\?qt-video-autoresize=.*/qt-video-autoresize=0/' ~/snap/vlc/common/v
 
 # Update Brave Settings
 echo "Updating Brave Settings"
+
+# Install Jellyfin Media Player
+echo "Install Jellyfin Media Player"
+sudo apt install -y flatpak
+sudo apt install -y gnome-software-plugin-flatpak
+flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+flatpak install -y flathub com.github.iwalton3.jellyfin-media-player
