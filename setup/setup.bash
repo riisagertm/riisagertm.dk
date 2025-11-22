@@ -6,7 +6,7 @@ echo "Updating General Settings"
 echo "- Disable swapoff"
 sudo swapoff -a
 echo "- Setting Wallpaper"
-WALLPAPER_PATH="~/.config/wallpaper"
+WALLPAPER_PATH="$HOME/.config/wallpaper"
 wget https://riisagertm.dk/wallpaper.png -O "$WALLPAPER_PATH"
 gsettings set org.gnome.desktop.background picture-uri "file://$WALLPAPER_PATH"
 gsettings set org.gnome.desktop.background picture-uri-dark "file://$WALLPAPER_PATH"
