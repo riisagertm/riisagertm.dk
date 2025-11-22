@@ -1,11 +1,10 @@
 #!/bin/bash
 echo "Setting up PC"
-sudo -v
 
 # Updating Settings
 echo "Updating General Settings"
 echo "- Disable swapoff"
-swapoff -a
+sudo swapoff -a
 echo "- Setting Wallpaper"
 WALLPAPER_PATH="~/.config/wallpaper"
 wget https://riisagertm.dk/wallpaper.png -O "$WALLPAPER_PATH"
