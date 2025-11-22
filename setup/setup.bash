@@ -1,5 +1,6 @@
 #!/bin/bash
 echo "Setting up PC"
+sudo -v
 
 # Updating Settings
 echo "Updating General Settings"
