@@ -38,6 +38,23 @@ gsettings set org.gnome.desktop.privacy report-technical-problems false
 echo "- Enabling Line Numbers in Text Editor"
 gsettings set org.gnome.TextEditor show-line-numbers true
 
+while true; do
+    read -p "Do you want to begin software installation? (y/n): " answer
+    case "$answer" in
+        [Yy]* ) 
+            echo "Beginning software installation"
+            break
+            ;;
+        [Nn]* ) 
+            echo "Exiting..."
+            exit 0
+            ;;
+        * ) 
+            echo "Please answer y or n."
+            ;;
+    esac
+done
+
 # Install Software
 echo "Installing Software"
 sudo snap install spotify
