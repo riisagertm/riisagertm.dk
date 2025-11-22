@@ -153,6 +153,48 @@ sed -i 's/^#\?qt-video-autoresize=.*/qt-video-autoresize=0/' ~/snap/vlc/common/v
 echo "Setting Dash Shortcuts"
 gsettings set org.gnome.shell favorite-apps "['brave-browser.desktop', 'org.gnome.Nautilus.desktop', 'snap-store_snap-store.desktop', 'proton-mail.desktop', 'spotify_spotify.desktop']"
 
+# Adding programs to autostart
+echo "Adding Proton VPN to autostart"
+cat > $HOME/.config/autostart/protonvpn-app.desktop <<EOF
+[Desktop Entry]
+Type=Application
+Exec=/usr/bin/protonvpn-app
+Hidden=false
+NoDisplay=false
+X-GNOME-Autostart-enabled=true
+Name[en_US]=Proton VPN
+Name=Proton VPN
+Comment[en_US]=
+Comment=
+EOF
+echo "Adding filen.io to autostart"
+cat > $HOME/.config/autostart/@filendesktop.desktop <<EOF
+[Desktop Entry]
+Type=Application
+Exec="/opt/Filen/@filendesktop" %U
+Hidden=false
+NoDisplay=false
+X-GNOME-Autostart-enabled=true
+Name[en_US]=Filen
+Name=Filen
+Comment[en_US]=Cloud service
+Comment=Cloud service
+EOF
+echo "Adding ticktick to autostart"
+cat > $HOME/.config/autostart/ticktick.desktop <<EOF
+[Desktop Entry]
+Type=Application
+Exec=/snap/bin/ticktick
+Hidden=false
+NoDisplay=false
+X-GNOME-Autostart-enabled=false
+Name[en_US]=TickTick
+Name=TickTick
+Comment[en_US]=
+Comment=
+EOF
+
+
 # Install Jellyfin Media Player
 echo "Install Jellyfin Media Player"
 sudo apt install -y flatpak
