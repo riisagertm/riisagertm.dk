@@ -152,6 +152,10 @@ sed -i 's/^#\?qt-video-autoresize=.*/qt-video-autoresize=0/' ~/snap/vlc/common/v
 # Update Brave Settings
 echo "Updating Brave Settings"
 
+# Set Dash Shortcuts
+echo "Setting Dash Shortcuts"
+gsettings set org.gnome.shell favorite-apps "['brave-browser.desktop', 'org.gnome.Nautilus.desktop', 'snap-store_snap-store.desktop', 'proton-mail.desktop', 'spotify_spotify.desktop']"
+
 # Install Jellyfin Media Player
 echo "Install Jellyfin Media Player"
 sudo apt install -y flatpak
