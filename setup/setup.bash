@@ -10,6 +10,8 @@ WALLPAPER_PATH="$HOME/.config/wallpaper"
 wget https://riisagertm.dk/wallpaper.png -O "$WALLPAPER_PATH"
 gsettings set org.gnome.desktop.background picture-uri "file://$WALLPAPER_PATH"
 gsettings set org.gnome.desktop.background picture-uri-dark "file://$WALLPAPER_PATH"
+echo "- Enabling Dark Mode"
+gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
 echo "- Show Hidden Files"
 gsettings set org.gtk.gtk4.Settings.FileChooser show-hidden true
 echo "- Disable Tile Groups"
