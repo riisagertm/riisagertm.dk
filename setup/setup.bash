@@ -149,9 +149,6 @@ sed -i 's/^#\?qt-recentplay=.*/qt-recentplay=0/' ~/snap/vlc/common/vlcrc
 echo "- Disable Autoresize"
 sed -i 's/^#\?qt-video-autoresize=.*/qt-video-autoresize=0/' ~/snap/vlc/common/vlcrc
 
-# Update Brave Settings
-echo "Updating Brave Settings"
-
 # Set Dash Shortcuts
 echo "Setting Dash Shortcuts"
 gsettings set org.gnome.shell favorite-apps "['brave-browser.desktop', 'org.gnome.Nautilus.desktop', 'snap-store_snap-store.desktop', 'proton-mail.desktop', 'spotify_spotify.desktop']"
