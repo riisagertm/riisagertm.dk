@@ -39,6 +39,8 @@ echo "- Disabling Reporting of Technical Problems"
 gsettings set org.gnome.desktop.privacy report-technical-problems false
 echo "- Enabling Line Numbers in Text Editor"
 gsettings set org.gnome.TextEditor show-line-numbers true
+echo "- Disabling Restore Session in Text Editor"
+gsettings set org.gnome.TextEditor restore-session false
 echo "- Disabling Bluetooth Autolaunch"
 # Path to the main.conf file
 CONF_FILE="/etc/bluetooth/main.conf"
