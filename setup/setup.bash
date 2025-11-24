@@ -5,11 +5,13 @@ echo "Setting up PC"
 echo "Updating General Settings"
 echo "- Disable swapoff"
 sudo swapoff -a
-echo "- Setting Wallpaper"
 WALLPAPER_PATH="$HOME/.config/wallpaper"
+if [ ! -f "$WALLPAPER_PATH" ]; then
+echo "- Setting Wallpaper"
 wget https://riisagertm.dk/wallpaper.png -O "$WALLPAPER_PATH"
 gsettings set org.gnome.desktop.background picture-uri "file://$WALLPAPER_PATH"
 gsettings set org.gnome.desktop.background picture-uri-dark "file://$WALLPAPER_PATH"
+fi
 echo "- Enabling Dark Mode"
 gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
 echo "- Show Hidden Files"
@@ -37,6 +39,22 @@ echo "- Disabling Reporting of Technical Problems"
 gsettings set org.gnome.desktop.privacy report-technical-problems false
 echo "- Enabling Line Numbers in Text Editor"
 gsettings set org.gnome.TextEditor show-line-numbers true
+echo "- Disabling Bluetooth Autolaunch"
+# Path to the main.conf file
+CONF_FILE="/etc/bluetooth/main.conf"
+
+# Check if the file exists
+if [[ ! -f "$CONF_FILE" ]]; then
+echo "Error: $CONF_FILE not found!"
+else
+# Use sed to replace 'AutoEnable=true' with 'AutoEnable=false', or add it if it doesn't exist
+sudo sed -i 's/^AutoEnable=true/AutoEnable=false/' "$CONF_FILE"
+
+# If the line does not exist, append it to the file
+if ! grep -q "^AutoEnable=" "$CONF_FILE"; then
+echo "AutoEnable=false" | sudo tee -a "$CONF_FILE" > /dev/null
+fi
+fi
 
 # Install Software
 echo "Installing Software"
