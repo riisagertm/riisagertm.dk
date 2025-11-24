@@ -61,16 +61,26 @@ sudo apt install -y filezilla
 sudo apt install -y wine
 
 # Install filen.io
+if ! dpkg -l | grep -qw "filen"; then
 echo "Installing filen.io"
 wget https://cdn.filen.io/@filen/desktop/release/latest/Filen_linux_amd64.deb -O /tmp/filen.deb
 sudo apt install /tmp/filen.deb
 rm /tmp/filen.deb
+else
+echo "filen.io already installed"
+fi
+
 
 # Install brave
+if ! dpkg -l | grep -qw "brave-browser"; then
 echo "Installing Brave"
 curl -fsS https://dl.brave.com/install.sh | sh
+else
+echo "Brave already installed"
+fi
 
 # Install GeoGebra
+if [ ! -f "$HOME/geogebra/icon.png" ]; then
 echo "Installing GeoGebra"
 mkdir ~/geogebra
 wget https://download.geogebra.org/package/linux-port -O ~/geogebra/geogebra.tar.bz2
@@ -89,14 +99,23 @@ Name=GeoGebra
 Icon=$HOME/geogebra/icon.png
 EOF
 sudo mv ~/geogebra/geogebra.desktop /usr/share/applications/
+else
+echo "GeoGebra already installed"
+fi
+
 
 # Install Steam
+if ! dpkg -l | grep -qw "steam-launcher"; then
 echo "Installing Steam"
 wget https://cdn.fastly.steamstatic.com/client/installer/steam.deb -O /tmp/steam.deb
 sudo apt install -y /tmp/steam.deb
 rm /tmp/steam.deb
+else
+echo "Steam already installed"
+fi
 
 # Install PDFsam Basic
+if ! dpkg -l | grep -qw "pdfsam-basic"; then
 echo "Installing PDFsam Basic"
 PDFSAM_URL=$(
 curl -s "https://pdfsam.org/download-pdfsam-basic/" |
@@ -107,26 +126,45 @@ sed 's/href="//;s/"//'
 wget $PDFSAM_URL -O /tmp/pdfsam.deb
 sudo apt install -y /tmp/pdfsam.deb
 rm /tmp/pdfsam.deb
+else
+echo "PDFsam already installed"
+fi
 
 # Installing Proton Suite
 echo "Installing Proton Suite"
+if ! dpkg -l | grep -qw "proton-pass"; then
 echo "- Installing Proton Pass"
 wget https://proton.me/download/PassDesktop/linux/x64/ProtonPass.deb -O /tmp/ProtonPass.deb
 sudo apt install -y /tmp/ProtonPass.deb
 rm /tmp/ProtonPass.deb
+else
+echo "- Proton Pass already installed"
+fi
+
+if ! dpkg -l | grep -qw "proton-mail"; then
 echo "- Installing Proton Mail"
 wget https://proton.me/download/mail/linux/ProtonMail-desktop-beta.deb -O /tmp/ProtonMail.deb
 sudo apt install -y /tmp/ProtonMail.deb
 rm /tmp/ProtonMail.deb
+else
+echo "- Proton Mail already installed"
+fi
+
+if ! dpkg -l | grep -qw "proton-vpn"; then
 echo "- Installing Proton VPN"
 wget https://repo.protonvpn.com/debian/dists/stable/main/binary-all/protonvpn-stable-release_1.0.8_all.deb -O /tmp/ProtonVPN.deb
 sudo dpkg -i /tmp/ProtonVPN.deb && sudo apt update
 sudo apt install -y proton-vpn-gnome-desktop
 rm /tmp/ProtonVPN.deb
+else
+echo "- Proton VPN already installed"
+fi
 
 # Update VLC Settings
 echo "Updating VLC Settings"
+if [ ! -f "$HOME/snap/vlc/common/vlcrc" ]; then
 vlc
+fi
 echo "- Disabling Recently Played"
 sed -i 's/^#\?qt-recentplay=.*/qt-recentplay=0/' ~/snap/vlc/common/vlcrc
 echo "- Disable Autoresize"
@@ -137,6 +175,7 @@ echo "Setting Dash Shortcuts"
 gsettings set org.gnome.shell favorite-apps "['brave-browser.desktop', 'org.gnome.Nautilus.desktop', 'snap-store_snap-store.desktop', 'proton-mail.desktop', 'spotify_spotify.desktop']"
 
 # Adding programs to autostart
+mkdir -p "$HOME/.config/autostart/" 
 echo "Adding Proton VPN to autostart"
 cat > $HOME/.config/autostart/protonvpn-app.desktop <<EOF
 [Desktop Entry]
@@ -179,8 +218,17 @@ EOF
 
 
 # Install Jellyfin Media Player
-echo "Install Jellyfin Media Player"
+if ! dpkg -l | grep -qw "flatpak"; then
 sudo apt install -y flatpak
 sudo apt install -y gnome-software-plugin-flatpak
+fi
+
+if dpkg -l | grep -qw "flatpak"; then
+if ! flatpak list | grep -qw "com.github.iwalton3.jellyfin-media-player"; then
+echo "Install Jellyfin Media Player"
 flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 flatpak install -y flathub com.github.iwalton3.jellyfin-media-player
+else
+echo "Jellyfin Media Player already installed"
+fi
+fi
