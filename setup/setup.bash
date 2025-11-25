@@ -236,6 +236,10 @@ Comment[en_US]=
 Comment=
 EOF
 
+# Remove Firefox
+if snap list firefox &>/dev/null; then
+sudo snap remove --purge firefox
+fi
 
 # Install Jellyfin Media Player
 if ! dpkg -l | grep -qw "flatpak"; then
