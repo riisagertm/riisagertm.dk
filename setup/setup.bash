@@ -61,6 +61,8 @@ fi
 # Install Software
 echo "Installing Software"
 sudo snap install spotify
+sudo snap install proton-pass
+sudo snap install proton-mail
 sudo snap install ticktick
 sudo snap install vlc
 sudo snap install discord
@@ -68,6 +70,18 @@ sudo snap install freecad
 sudo snap install gimp
 sudo snap install inkscape
 sudo snap install signal-desktop
+sudo snap install codium --classic
+sudo snap install steam
+read -r -p "Do you want to install Shotcut? (y/n) " answer
+
+case "${answer,,}" in
+    y|yes)
+        sudo snap install shotcut --classic
+        ;;
+    *)
+        ;;
+esac
+
 sudo apt update
 sudo apt install -y neofetch
 sudo apt install -y net-tools
@@ -124,16 +138,6 @@ echo "GeoGebra already installed"
 fi
 
 
-# Install Steam
-if ! dpkg -l | grep -qw "steam-launcher"; then
-echo "Installing Steam"
-wget https://cdn.fastly.steamstatic.com/client/installer/steam.deb -O /tmp/steam.deb
-sudo apt install -y /tmp/steam.deb
-rm /tmp/steam.deb
-else
-echo "Steam already installed"
-fi
-
 # Install PDFsam Basic
 if ! dpkg -l | grep -qw "pdfsam-basic"; then
 echo "Installing PDFsam Basic"
@@ -150,28 +154,9 @@ else
 echo "PDFsam already installed"
 fi
 
-# Installing Proton Suite
-echo "Installing Proton Suite"
-if ! dpkg -l | grep -qw "proton-pass"; then
-echo "- Installing Proton Pass"
-wget https://proton.me/download/PassDesktop/linux/x64/ProtonPass.deb -O /tmp/ProtonPass.deb
-sudo apt install -y /tmp/ProtonPass.deb
-rm /tmp/ProtonPass.deb
-else
-echo "- Proton Pass already installed"
-fi
-
-if ! dpkg -l | grep -qw "proton-mail"; then
-echo "- Installing Proton Mail"
-wget https://proton.me/download/mail/linux/ProtonMail-desktop-beta.deb -O /tmp/ProtonMail.deb
-sudo apt install -y /tmp/ProtonMail.deb
-rm /tmp/ProtonMail.deb
-else
-echo "- Proton Mail already installed"
-fi
-
+# Installing Proton VPN
 if ! dpkg -l | grep -qw "proton-vpn"; then
-echo "- Installing Proton VPN"
+echo "Installing Proton VPN"
 wget https://repo.protonvpn.com/debian/dists/stable/main/binary-all/protonvpn-stable-release_1.0.8_all.deb -O /tmp/ProtonVPN.deb
 sudo dpkg -i /tmp/ProtonVPN.deb && sudo apt update
 sudo apt install -y proton-vpn-gnome-desktop
@@ -192,7 +177,7 @@ sed -i 's/^#\?qt-video-autoresize=.*/qt-video-autoresize=0/' ~/snap/vlc/common/v
 
 # Set Dash Shortcuts
 echo "Setting Dash Shortcuts"
-gsettings set org.gnome.shell favorite-apps "['brave-browser.desktop', 'org.gnome.Nautilus.desktop', 'snap-store_snap-store.desktop', 'proton-mail.desktop', 'spotify_spotify.desktop']"
+gsettings set org.gnome.shell favorite-apps "['brave-browser.desktop', 'org.gnome.Nautilus.desktop', 'snap-store_snap-store.desktop', 'proton-mail_proton-mail.desktop', 'spotify_spotify.desktop']"
 
 # Adding programs to autostart
 mkdir -p "$HOME/.config/autostart/" 
