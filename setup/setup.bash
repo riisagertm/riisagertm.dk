@@ -63,6 +63,7 @@ echo "Installing Software"
 sudo snap install spotify
 sudo snap install proton-pass
 sudo snap install proton-mail
+sudo snap install brave
 sudo snap install ticktick
 sudo snap install vlc
 sudo snap install discord
@@ -102,15 +103,6 @@ sudo apt install /tmp/filen.deb
 rm /tmp/filen.deb
 else
 echo "filen.io already installed"
-fi
-
-
-# Install brave
-if ! dpkg -l | grep -qw "brave-browser"; then
-echo "Installing Brave"
-curl -fsS https://dl.brave.com/install.sh | sh
-else
-echo "Brave already installed"
 fi
 
 # Install GeoGebra
