@@ -63,6 +63,7 @@ echo "Installing Software"
 sudo snap install spotify
 sudo snap install proton-pass
 sudo snap install proton-mail
+sudo snap install proton-vpn
 sudo snap install brave
 sudo snap install ticktick
 sudo snap install vlc
@@ -144,17 +145,6 @@ sudo apt install -y /tmp/pdfsam.deb
 rm /tmp/pdfsam.deb
 else
 echo "PDFsam already installed"
-fi
-
-# Installing Proton VPN
-if ! dpkg -l | grep -qw "proton-vpn"; then
-echo "Installing Proton VPN"
-wget https://repo.protonvpn.com/debian/dists/stable/main/binary-all/protonvpn-stable-release_1.0.8_all.deb -O /tmp/ProtonVPN.deb
-sudo dpkg -i /tmp/ProtonVPN.deb && sudo apt update
-sudo apt install -y proton-vpn-gnome-desktop
-rm /tmp/ProtonVPN.deb
-else
-echo "- Proton VPN already installed"
 fi
 
 # Update VLC Settings
